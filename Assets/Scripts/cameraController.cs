@@ -11,6 +11,7 @@ public class cameraController : MonoBehaviour
     [Range(0,90)]
 
     private float headCameraAngle = 0f;
+    private int itemLayerMask = 1 << 8;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +25,14 @@ public class cameraController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
         float SensitivityCorrection = Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
+        RaycastHit hitObject;
+        bool hitSomething;
 
         if(SensitivityCorrection > 0f){
-            Sensitivity = Sensitivity + 50f;
+            Sensitivity = Sensitivity + 25f;
         }
         else if(SensitivityCorrection < 0f){
-            Sensitivity = Sensitivity - 50f;
+            Sensitivity = Sensitivity - 25f;
         }
 
         if(Sensitivity <= 1f){
@@ -42,6 +45,12 @@ public class cameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(headCameraAngle, 0f, 0f);
 
         playerPosition.Rotate(Vector3.up * mouseX);
+
+        hitSomething = Physics.Raycast(transform.position, transform.forward, out hitObject, 3f, itemLayerMask);
+
+        if(hitSomething){
+            hitObject.transform.GetComponent<itemInteraction>().IsLookedAt();
+        }
 
     }
 
