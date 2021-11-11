@@ -35,6 +35,17 @@ public class InventoryManagement : MonoBehaviour
             droppedItem.owner.transform.forward;
     }
 
+    public List<Interactable> GetItemsOwned(GameObject playerOwner){
+        List<Interactable> itemsToReturn = new List<Interactable>();
+
+        for(int i = 0; i < takenItems.Count; i++){
+            if(takenItems[i].owner == playerOwner){
+                itemsToReturn.Add(takenItems[i]);
+            }
+        }
+        return itemsToReturn;
+    }
+
 }
 
 public class Interactable
