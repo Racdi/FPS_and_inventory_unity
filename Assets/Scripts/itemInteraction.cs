@@ -30,5 +30,4 @@ public class ItemInteraction : MonoBehaviour
         timeout = intensity;
     }
 
-
 }
