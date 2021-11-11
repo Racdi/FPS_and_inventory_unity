@@ -17,16 +17,13 @@ public class movementController : MonoBehaviour
     void Update()
     {
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        // Ability to "run" pressing left shift (aka Fire3)
+        float sprint = Input.GetAxis("Fire3");
         //Make sure character won't move faster in diagonal
         movementInput.Normalize();
 
         Vector3 movementController = movementInput.y * transform.forward + movementInput.x * transform.right;
 
-        // Ability to "run" pressing left shift (aka Fire3)
-        if(Input.GetAxis("Fire3") != 0){
-            movementController = movementController * 2;
-        }
-        playerController.Move(movementController * Speed * Time.deltaTime);
+        playerController.Move(movementController * Speed * Time.deltaTime * (sprint +1));
     }
 }
