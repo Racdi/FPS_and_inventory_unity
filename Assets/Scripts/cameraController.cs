@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public Transform playerPosition;
 
@@ -49,7 +49,11 @@ public class cameraController : MonoBehaviour
         hitSomething = Physics.Raycast(transform.position, transform.forward, out hitObject, 3f, itemLayerMask);
 
         if(hitSomething){
-            hitObject.transform.GetComponent<itemInteraction>().IsLookedAt();
+            hitObject.transform.GetComponent<ItemInteraction>().IsLookedAt();
+            if(Input.GetAxis("Fire1") == 1){
+                hitObject.transform.gameObject.SetActive(false);
+                Debug.Log("Aight, I'm out");
+            }
         }
 
     }

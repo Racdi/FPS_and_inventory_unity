@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemInteraction : MonoBehaviour
+public class ItemInteraction : MonoBehaviour
 {
     Outline outline;
     public float intensity = 10f;
