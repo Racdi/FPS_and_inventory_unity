@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public GameObject inventory;
     public Transform playerPosition;
 
     public float Sensitivity = 200f;
@@ -51,8 +52,7 @@ public class CameraController : MonoBehaviour
         if(hitSomething){
             hitObject.transform.GetComponent<ItemInteraction>().IsLookedAt();
             if(Input.GetAxis("Fire1") == 1){
-                hitObject.transform.gameObject.SetActive(false);
-                Debug.Log("Aight, I'm out");
+                inventory.GetComponent<InventoryManagement>().StoreItem(this.gameObject,hitObject.transform.gameObject);
             }
         }
 
