@@ -29,18 +29,18 @@ public class CameraController : MonoBehaviour
         RaycastHit hitObject;
         bool hitSomething;
 
-        if(SensitivityCorrection > 0f){
-            Sensitivity = Sensitivity + 25f;
-        }
-        else if(SensitivityCorrection < 0f){
-            Sensitivity = Sensitivity - 25f;
-        }
-
-        if(Sensitivity <= 1f){
-            Sensitivity = 25f;
-        }
-
+        // Cursor Locked means menu is closed
         if(Cursor.lockState == CursorLockMode.Locked){
+                if(SensitivityCorrection > 0f){
+                Sensitivity = Sensitivity + 25f;
+            }
+            else if(SensitivityCorrection < 0f){
+                Sensitivity = Sensitivity - 25f;
+            }
+
+            if(Sensitivity <= 1f){
+                Sensitivity = 25f;
+            }
             headCameraAngle -= mouseY;
             headCameraAngle = Mathf.Clamp(headCameraAngle, -visionAngle, visionAngle);
             transform.localRotation = Quaternion.Euler(headCameraAngle, 0f, 0f);

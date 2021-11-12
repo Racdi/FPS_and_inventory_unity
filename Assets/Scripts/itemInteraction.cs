@@ -7,6 +7,7 @@ public class ItemInteraction : MonoBehaviour
     Outline outline;
     public float intensity = 10f;
     float timeout = 0;
+    
     // Start is called before the first frame update
     void Start()
     {

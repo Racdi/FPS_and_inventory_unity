@@ -5,13 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     public float Speed = 5f;
-    public GameObject playerController;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CharacterController playerController;
 
     // Update is called once per frame
     void Update()

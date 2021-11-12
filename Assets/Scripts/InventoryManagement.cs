@@ -22,12 +22,6 @@ public class InventoryManagement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StoreItem(GameObject storingPlayer, GameObject storedItem){
         Interactable pocketed = new Interactable(storedItem, storingPlayer);
         takenItems.Add(pocketed);
