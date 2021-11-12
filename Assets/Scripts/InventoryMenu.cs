@@ -12,10 +12,15 @@ public class InventoryMenu : MonoBehaviour
     
     bool isActive = false;
     List<GameObject> buttonList = new List<GameObject>();
+    List<GameObject> iconsList = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         itemView.SetActive(false);
+        GameObject[] iconsArray = GameObject.FindGameObjectsWithTag("Icon");
+        for(int i = 0; i < iconsArray.Length; i++){
+            iconsList.Add(iconsArray[i]);
+        }
     }
 
     // Update is called once per frame
@@ -62,7 +67,16 @@ public class InventoryMenu : MonoBehaviour
         GameObject newButton = GameObject.Instantiate(buttonPrefab);
         newButton.transform.SetParent(itemViewContent.transform);
         newButton.transform.Find("Text").GetComponent<Text>().text = item.item.name;
-        newButton.transform.Find("Icon").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Resources/"+item.item.name);
+
+        Sprite iconSprite = null;
+        for(int i=0; i<iconsList.Count; i++){
+            if(iconsList[i].name == item.item.name) {
+                iconSprite = iconsList[i].GetComponent<SpriteRenderer>().sprite;
+            break;
+            }
+        }
+        newButton.transform.Find("Icon").GetComponent<SpriteRenderer>().sprite = iconSprite;
+
         Button button = newButton.GetComponent<Button>();
         button.onClick.AddListener(
             () => {
