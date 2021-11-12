@@ -40,18 +40,18 @@ public class CameraController : MonoBehaviour
             Sensitivity = 25f;
         }
 
-        headCameraAngle -= mouseY;
-        headCameraAngle = Mathf.Clamp(headCameraAngle, -visionAngle, visionAngle);
-
-        transform.localRotation = Quaternion.Euler(headCameraAngle, 0f, 0f);
-
-        playerPosition.Rotate(Vector3.up * mouseX);
+        if(Cursor.lockState == CursorLockMode.Locked){
+            headCameraAngle -= mouseY;
+            headCameraAngle = Mathf.Clamp(headCameraAngle, -visionAngle, visionAngle);
+            transform.localRotation = Quaternion.Euler(headCameraAngle, 0f, 0f);
+            playerPosition.Rotate(Vector3.up * mouseX);
+        }
 
         hitSomething = Physics.Raycast(transform.position, transform.forward, out hitObject, 3f, itemLayerMask);
 
         if(hitSomething){
             hitObject.transform.GetComponent<ItemInteraction>().IsLookedAt();
-            if(Input.GetAxis("Fire1") == 1){
+            if(Input.GetAxis("Fire1") == 1 && Cursor.lockState == CursorLockMode.Locked){
                 inventory.GetComponent<InventoryManagement>().StoreItem(this.gameObject,hitObject.transform.gameObject);
             }
         }

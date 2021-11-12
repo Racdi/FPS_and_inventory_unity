@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class InventoryManagement : MonoBehaviour
 {
+    public static InventoryManagement instance = null;
     public List<Interactable> takenItems = new List<Interactable>();
     public List<GameObject> players = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        //Sanity check
+        if(instance != null && instance != this){
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
         for(int i = 0; i < playersArray.Length; i++){
             players.Add(playersArray[i]);
