@@ -48,7 +48,7 @@ public class InventoryMenu : MonoBehaviour
     void CreateLayoutButtons(){
         List<Interactable> ownedItems = InventoryManagement.instance.GetItemsOwned(gameObject);
         for(int i = 0; i < ownedItems.Count ; i++){
-            buttonList.Add(createButton(ownedItems[i]));
+            buttonList.Add(createButton(ownedItems[i],i));
         }
     }
     void ClearButtons(){
@@ -57,11 +57,13 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
-    GameObject createButton(Interactable item){
+    GameObject createButton(Interactable item, int offset){
         Interactable itemToTakeout = item;
 
         GameObject newButton = GameObject.Instantiate(buttonPrefab);
         newButton.transform.SetParent(itemViewContent.transform);
+        Debug.Log(offset);
+        //newButton.transform.position = new Vector3(100,offset*50,0);
         newButton.transform.Find("Text").GetComponent<Text>().text = item.item.name;
         Button button = newButton.GetComponent<Button>();
         button.onClick.AddListener(

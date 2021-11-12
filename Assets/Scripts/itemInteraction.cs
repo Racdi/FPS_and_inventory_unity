@@ -26,7 +26,6 @@ public class ItemInteraction : MonoBehaviour
     }
 
     public void IsLookedAt(){
-        Debug.Log("Item "+name+" is being looked at");
         timeout = intensity;
     }
 

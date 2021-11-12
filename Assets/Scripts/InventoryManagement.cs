@@ -29,7 +29,6 @@ public class InventoryManagement : MonoBehaviour
     }
 
     public void StoreItem(GameObject storingPlayer, GameObject storedItem){
-        Debug.Log("Aight, I'm out");
         Interactable pocketed = new Interactable(storedItem, storingPlayer);
         takenItems.Add(pocketed);
         storedItem.SetActive(false);
